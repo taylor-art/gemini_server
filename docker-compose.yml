@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  flask_app:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./logs:/var/log/myapp
+    environment:
+      - LOG_FILE=/var/log/myapp/app.log
