@@ -17,10 +17,16 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# log
+# 创建日志记录器
 log_file = os.getenv('LOG_FILE', 'app.log')
-logging.basicConfig(filename=log_file, level=logging.INFO,
-                    format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s:%(levelname)s:%(message)s',
+    handlers=[
+        logging.FileHandler(log_file),    # 写入日志文件
+        logging.StreamHandler()           # 输出到标准输出
+    ]
+)
 
 api_key = os.getenv("GEMINI_KEY")
 if api_key is None:
